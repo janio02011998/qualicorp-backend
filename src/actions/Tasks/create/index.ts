@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, Next } from "restify";
 import { driver } from "~/database";
 import { ITask } from "~/interfaces/Model/Tasks";
 
-async function create(req: Request, res: Response) {
+async function create(req: Request, res: Response, next: Next) {
   const session = driver.session({ database: "neo4j" });
   try {
     const { id, title, completed }: ITask = req.body;
@@ -21,12 +21,15 @@ async function create(req: Request, res: Response) {
       console.log("Create new task", task1);
     });
 
-    return res.send({ success: true });
+    res.send({ success: true });
   } catch (err) {
-    return res.send("Erro on create new tasks");
+    console.log(err);
+    res.status(400);
+    res.send("Erro on create new tasks");
   } finally {
     await session.close();
     await driver.close();
+    return next();
   }
 }
 

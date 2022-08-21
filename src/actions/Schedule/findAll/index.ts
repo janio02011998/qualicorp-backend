@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { Request, Response, Next } from "restify";
 
-async function findAll(req: Request, res: Response) {
+async function findAll(req: Request, res: Response, next: Next) {
   try {
     const tasks = [
       { id: 1660950150918, title: "Ir ao mercado", completed: false },
@@ -10,10 +10,12 @@ async function findAll(req: Request, res: Response) {
       { id: 1660950150922, title: "Ir ao jogo", completed: false },
     ];
 
-    return res.send(tasks);
+    res.send(tasks);
   } catch (err) {
     console.log(err);
-    return res.status(400).send("Erro on find all tasks");
+    res.status(400);
+  } finally {
+    return next();
   }
 }
 

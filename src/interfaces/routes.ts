@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, Next } from "restify";
 
 export interface IRoutes {
   path: string;
   method: string;
-  action: (req: Request, res: Response) => void;
-  middlewares?: { (req: Request, res: Response, next: NextFunction): void }[];
+  action: (req: Request, res: Response, next: Next) => void;
+  middlewares?: { (req: Request, res: Response): void }[];
   auth?: string;
 }
 

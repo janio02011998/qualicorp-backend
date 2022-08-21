@@ -17,6 +17,13 @@ const routes = [
     description: "get all tasks",
     ...Tasks.findAll,
   },
+  {
+    method: "DEL",
+    auth: "basic",
+    path: "/:id",
+    description: "remove task",
+    ...Tasks.remove,
+  },
 ];
 
 export default {

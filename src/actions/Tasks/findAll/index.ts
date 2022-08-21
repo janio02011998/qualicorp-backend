@@ -1,19 +1,26 @@
-import { Request, Response } from "express";
+import { Request, Response, Next } from "restify";
+import { driver } from "~/database";
 
-async function findAll(req: Request, res: Response) {
+async function findAll(req: Request, res: Response, next: Next) {
+  const session = driver.session({ database: "neo4j" });
   try {
-    const tasks = [
-      { id: 1660950150918, title: "Ir ao mercado", completed: false },
-      { id: 1660950150919, title: "Fazer lanche", completed: false },
-      { id: 1660950150920, title: "Malhar", completed: false },
-      { id: 1660950150921, title: "Buscar filha", completed: false },
-      { id: 1660950150922, title: "Ir ao jogo", completed: false },
-    ];
+    const writeQuery = `MATCH (n:Tasks) RETURN n`;
 
-    return res.send(tasks);
+    const writeResult = await session.writeTransaction((tx) =>
+      tx.run(writeQuery)
+    );
+
+    const tasks = writeResult.records.map(
+      (record) => record.get("n").properties
+    );
+
+    res.send(tasks);
   } catch (err) {
-    console.log(err);
-    return res.status(400).send("Erro on find all tasks");
+    res.status(400);
+  } finally {
+    await session.close();
+    await driver.close();
+    return next();
   }
 }
 

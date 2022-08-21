@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response, Next } from "restify";
 import { driver } from "~/database";
 
-async function create(req: Request, res: Response) {
+async function create(req: Request, res: Response, next: Next) {
   const session = driver.session({ database: "neo4j" });
   try {
     const date = new Date();
@@ -52,13 +52,14 @@ async function create(req: Request, res: Response) {
     //   );
     // });
 
-    return res.send("teste 3");
+    res.send("teste 3");
   } catch (err) {
     console.log(err);
-    return res.status(500).send("Erro on create new schedule");
+    res.status(500);
   } finally {
     await session.close();
     await driver.close();
+    return next();
   }
 }
 
