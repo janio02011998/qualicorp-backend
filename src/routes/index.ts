@@ -1,10 +1,14 @@
 import * as Restify from "restify";
 import { includeRoutePrefix } from "./includeRoutePrefix";
 import ScheduleRoutes from "~/endpoints/Schedule";
+import TasksRoutes from "~/endpoints/Tasks";
 
 const server = Restify.createServer();
 
-export const routes = [...includeRoutePrefix(ScheduleRoutes)];
+export const routes = [
+  ...includeRoutePrefix(ScheduleRoutes),
+  ...includeRoutePrefix(TasksRoutes),
+];
 
 for (const route of routes) {
   const { path, action, method, middlewares = [], auth } = route;
