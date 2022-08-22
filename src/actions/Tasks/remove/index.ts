@@ -1,9 +1,8 @@
 import { Request, Response, Next } from "restify";
 
-import { driver } from "~/database";
+import { session } from "~/database";
 
 async function remove(req: Request, res: Response, next: Next) {
-  const session = driver.session({ database: "neo4j" });
   try {
     const data = req.params;
 
@@ -18,8 +17,6 @@ async function remove(req: Request, res: Response, next: Next) {
     console.log(err);
     res.status(400);
   } finally {
-    await session.close();
-    await driver.close();
     return next();
   }
 }

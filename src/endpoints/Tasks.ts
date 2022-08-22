@@ -24,6 +24,13 @@ const routes = [
     description: "remove task",
     ...Tasks.remove,
   },
+  {
+    method: "PATCH",
+    auth: "basic",
+    path: "/:id",
+    description: "update task",
+    ...Tasks.update,
+  },
 ];
 
 export default {

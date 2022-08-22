@@ -1,13 +1,14 @@
 import { Request, Response, Next } from "restify";
-import { driver } from "~/database";
+import { session } from "~/database";
 
 async function findAll(req: Request, res: Response, next: Next) {
-  const session = driver.session({ database: "neo4j" });
   try {
+    const { completed } = req.body;
+
     const writeQuery = `MATCH (n:Tasks) RETURN n`;
 
     const writeResult = await session.writeTransaction((tx) =>
-      tx.run(writeQuery)
+      tx.run(writeQuery, { completed })
     );
 
     const tasks = writeResult.records.map(
@@ -18,8 +19,6 @@ async function findAll(req: Request, res: Response, next: Next) {
   } catch (err) {
     res.status(400);
   } finally {
-    await session.close();
-    await driver.close();
     return next();
   }
 }
