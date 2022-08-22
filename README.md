@@ -18,10 +18,18 @@ Projeto desenvolvido para o desafio de back-end da qualicorp.
 
   Estrutura de pasta deve ficar assim: 
 
-  <img src="./src/assets/folder.png" height="380" />
-
-  A API fica disponível para requisições na porta 3333.
-
+  ├── src
+  │   └── actions/
+  │   └── database/
+  │   └── endpoints/
+  │   └── interfaces/
+  │   └── routes/
+  │   └── index.ts
+  ├── .editorconfig
+  ├── .env
+  ├── .gitignore
+  ├── package.json
+  └── tsconfig.json
 
 * **Dificuldades**
   * Não conhecimento prévio do neo4j, contudo por se tratar de um graph o aprendizado
