@@ -17,7 +17,7 @@ Projeto desenvolvido para o desafio de back-end da qualicorp.
   Fazer o download do .env do seguinte link: https://drive.google.com/drive/folders/1KHusrK7eY7ltANoSFfHC17bBgI5lr5UO?usp=sharing e colar no diretório do projeto.
 
   Estrutura de pasta deve ficar assim: 
-
+  ```
   ├── src
   │   └── actions/
   │   └── database/
@@ -30,7 +30,7 @@ Projeto desenvolvido para o desafio de back-end da qualicorp.
   ├── .gitignore
   ├── package.json
   └── tsconfig.json
-
+   ```
 * **Dificuldades**
   * Não conhecimento prévio do neo4j, contudo por se tratar de um graph o aprendizado
   para construção foi bastante acelerado.
