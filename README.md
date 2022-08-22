@@ -16,6 +16,10 @@ Projeto desenvolvido para o desafio de back-end da qualicorp.
 
   Fazer o download do .env do seguinte link: https://drive.google.com/drive/folders/1KHusrK7eY7ltANoSFfHC17bBgI5lr5UO?usp=sharing e colar no diretório do projeto.
 
+  Estrutura de pasta deve ficar assim: 
+
+  <img src="./src/assets/folder.png" height="380" />
+
   A API fica disponível para requisições na porta 3333.
 
 
