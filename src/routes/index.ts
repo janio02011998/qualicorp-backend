@@ -13,10 +13,6 @@ export const routes = [
 for (const route of routes) {
   const { path, action, method, middlewares = [], auth } = route;
 
-  // if (auth === 'basic') {
-  //   middlewares.unshift(basicAuth);
-  // }
-
   const methodLowerCase = method.toLowerCase() as
     | "all"
     | "get"
